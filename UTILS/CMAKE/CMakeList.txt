@@ -1,0 +1,195 @@
+==================================================================================================================
+ESP32
+cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DESP_PLATFORM=1 --warn-uninitialized -DCCACHE_ENABLE=0 
+c:\tools\esp32-latest\esp\hello_world
+
+cmake
+--no-warn-unused-cli 
+-DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE 
+-DCMAKE_BUILD_TYPE=Debug 
+-DCMAKE_C_COMPILER=D:/PROGRAM_LIBRARY/.espressif/tools/xtensa-esp32-elf/esp-2021r1-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc.exe 
+-DCMAKE_CXX_COMPILER=D:/PROGRAM_LIBRARY/.espressif/tools/xtensa-esp32-elf/esp-2021r1-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-g++.exe 
+-Hc:/Users/Broms/YandexDisk/PROJECTS/TEST_PROJECTS/TestESP_IDF3/template-app 
+-Bc:/Users/Broms/YandexDisk/PROJECTS/TEST_PROJECTS/TestESP_IDF3/template-app/build -G "Unix Makefiles"
+
+
+
+MSVC 2019 compiler path
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.24.28314\bin\Hostx64\x64\cl.exe
+
+mingw compilers
+D:\PROGRAM_LIBRARY\Qt515\Tools\mingw810_64\bin\gcc.exe
+D:\PROGRAM_LIBRARY\Qt515\Tools\mingw810_64\bin\g++.exe
+===================================================================================================================
+VISULA STUDIO NINJA PROJECT
+
+cmake.exe --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE 
+                               -DCMAKE_BUILD_TYPE:STRING=Release 
+                               -Sd:/DEVELOPMENT/ALL_TEST_PROJECT 
+                               -Bd:/DEVELOPMENT/ALL_TEST_PROJECT/build -G Ninja
+
+cmake --no-warn-unused-cli -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DCMAKE_BUILD_TYPE=Release -Sd:/DEVELOPMENT/ALL_TEST_PROJECT -Bd:/DEVELOPMENT/ALL_TEST_PROJECT/build -G Ninja
+===================================================================================================================
+OPENCV BUILD
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+        -D INSTALL_C_EXAMPLES=ON \
+	    -D INSTALL_PYTHON_EXAMPLES=ON \
+	        -D OPENCV_GENERATE_PKGCONFIG=ON \
+		    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_build/opencv_contrib/modules \
+		        -D BUILD_EXAMPLES=ON ..
+===================================================================================================================
+COMMON
+cmake .. -G Ninja # override the default generator
+cmake --help #list available generators
+
+#GENERATE VISUAL STUIDO SOLUTION
+cmake .. -G "Visual Studio 2019"
+cmake .. -G "Visual Studio 16"
+cmake .. -G "Visual Studio 16 2019"
+cmake.exe .. -G "Visual Studio 16 2019" -A x64 -T v120_xp
+cmake .. -G "Visual Studio 16 2019" -A x64 -Thost=x64
+
+
+SETTING BUILD VARIABLES
+
+CMAKE_PREFIX_PATH  #Path to search for dependent packages
+CMAKE_MODULE_PATH  #Path to search for additional CMake modules
+CMAKE_BUILD_TYPE   #Build configuration, such as Debug or Release. This is only relevant for single-configuration buildsystems such as Makefile and Ninja.
+CMAKE_INSTALL_PREFIX #Location to install the software to with the install build target
+CMAKE_TOOLCHAIN_FILE #File containing cross-compiling data such as toolchains and sysroots.
+BUILD_SHARED_LIBS    #Whether to build shared instead of static libraries for add_library() commands used without a type
+CMAKE_EXPORT_COMPILE_COMMANDS #Generate a compile_commands.json file for use with clang-based tools
+
+SETTING VARIABLES ON THE COMMAND LINE
+mkdir build; cd build;cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake . -UMyPackage_DIR #UNSET VARIABLE
+
+CMAKE_CACHE
+Store locations of compilers, tools and dependencies
+compile/link flags and paths to dependencies
+When it is first executed, CMake generates a CMakeCache.txt file in the build directory 
+containing key-value pairs for such artifacts.
+
+PRESETS
+CMake understands a file, CMakePresets.json, and its user-specific counterpart, 
+CMakeUserPresets.json, for saving presets for commonly-used configure settings.
+
+CMakePresets.json
+{
+  "version": 1,
+  "configurePresets": [
+    {
+      "name": "ninja-release",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ]
+}
+cmake -S /path/to/source --preset=ninja-release
+#generate a build directory in /path/to/source/build/ninja-release
+cmake -S /path/to/source --list-presets #LIST AVAILABLE PRESETS
+will list the presets available in /path/to/source/CMakePresets.json 
+and /path/to/source/CMakeUsersPresets.json without generating a build tree.
+
+BUILD PROJECTS
+cmake --build .
+cmake --build . --target myexe
+cmake --build . --target myexe --config Release
+cmake --build . --target myexe --verbose
+
+SELECTING a TARGET
+all     #The default target used by Makefile and Ninja generators.
+help    #Lists the targets available for build.
+clean   #Delete built object files and other output files.
+test    #Runs tests.
+install #Installs the software.
+This target is only automatically available 
+if the software defines install rules with the install() command
+
+BUILD PROGRAM available
+Unix Makefiles:  make
+NMake Makefiles: nmake jom
+MinGW Makefiles: mingw32-make
+ninja
+Visual Studio: msbuild
+The program invoked by the --build mode 
+is determined by the CMAKE_MAKE_PROGRAM variable.
+
+
+SOFTWARE INSTALATION
+
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_SYSROOT=$HOME/root \
+  -DCMAKE_STAGING_PREFIX=/tmp/package
+cmake --build .
+cmake --build . --target install
+
+If the provided software has install rules, 
+specified using the install() command, 
+they will install artifacts into that prefix.
+
+In cross-compiling or packaging scenarios where the sysroot is read-only 
+or where the sysroot should otherwise remain pristine, 
+the CMAKE_STAGING_PREFIX variable 
+can be set to a location to actually install the files.
+
+
+RUNNING TESTS
+ctest # run all tests
+
+A regular expression can be passed to run only tests which match the expression. 
+
+ctest -R Qt #run only tests with Qt in their name
+
+ctest -R Qt -j8 #run in parallel
+
+
+OPTIONS
+Options
+  -S <path-to-source>          = Explicitly specify a source directory.
+  -B <path-to-build>           = Explicitly specify a build directory.
+  -C <initial-cache>           = Pre-load a script to populate the cache.
+  -D <var>[:<type>]=<value>    = Create or update a cmake cache entry.
+  -U <globbing_expr>           = Remove matching entries from CMake cache.
+  -G <generator-name>          = Specify a build system generator.
+  -T <toolset-name>            = Specify toolset name if supported by
+                                 generator.
+  -A <platform-name>           = Specify platform name if supported by
+                                 generator.
+  -Wdev                        = Enable developer warnings.
+  -Wno-dev                     = Suppress developer warnings.
+  -Werror=dev                  = Make developer warnings errors.
+  -Wno-error=dev               = Make developer warnings not errors.
+  -Wdeprecated                 = Enable deprecation warnings.
+  -Wno-deprecated              = Suppress deprecation warnings.
+  -Werror=deprecated           = Make deprecated macro and function warnings
+                                 errors.
+  -Wno-error=deprecated        = Make deprecated macro and function warnings
+                                 not errors.
+                                 
+  --build <dir>                = Build a CMake-generated project binary tree.
+  --install <dir>              = Install a CMake-generated project binary
+                                 tree.
+  --open <dir>                 = Open generated project in the associated
+                                 application.
+                                 
+                                 
+ 
+  
+                               
+
+
+
+
+
+
+
+
+
+
+
+

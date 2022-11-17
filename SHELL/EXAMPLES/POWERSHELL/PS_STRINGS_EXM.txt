@@ -1,0 +1,5 @@
+[$env:path -split ";"] = [$env:path.split(";") > d:/esp_path.txt]
+$path_esp = cat path_esp.txt; $path_esp | grep  NAME | foreach { $_; $env:path += $_;}
+--------------------------------------------------------------------------------------
+$string_with_whitespace -split "\s+"; [SPLIT WHITESPACE] 
+$path_choco = $env:path -split ";" | grep choco; echo $path_choco; start $path_choco [OPEN DIRECTORY FROM GREP]

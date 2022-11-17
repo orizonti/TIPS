@@ -1,0 +1,101 @@
+1:ПСЕВДОНИМЫ| 2:ПОВЫШЕНИЕ ПРАВ| 3:ССЫЛКИ| 4:ЦИКЛЫ| 5:РАЗБИЕНИЕ СТРОК, ЛИСТЫ| 6:ПЕРЕМЕННЫЕ| 7:ПОКАЗАТЬ| УСТРОСТВА|
+8:СЕТЬ      |
+
+1: ПСЕВДОНИМЫ
+======================================================
+vim $PROFILE -> C:\Users\Broms\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+set-alias nvim "C:/neovim/Neovim/bin/nvim-qt.exe"
+======================================================
+
+2: ПОВЫШЕНИЕ ПРАВ
+======================================================
+start pwsh -verb runAs  
+gsudo command 
+======================================================
+
+3: ССЫЛКИ
+======================================================
+new-item -itemtype symboliclink -path ref_dst -target .\dst\dst2\
+cmd /c mklink /D DIR_REF /DIR_DST
+cmd /c mklink FILE_REF /FILE_DST
+======================================================
+
+4: ЦИКЛЫ
+======================================================
+$path_esp = cat path_esp.txt; $path_esp | grep  NAME | foreach { $_; $env:path += $_;}
+$tt | foreach { ping 192.168.2.$_ -w 1 -n 2 | grep -e "%" -e "ping"; echo "ping 192.168.2.$_"; }
+
+$DIRS = SOURCE_DIR:DST_DIR;
+$DIRS_LIST | ForEach -Parallel { $paths = $_.split(":"); rsync -uq --recursive --update $paths[0] $paths[1];}
+
+ls -recurse -name | rg -e bak -e vux | foreach {echo ("TO_DELETE  " + $_); rm $_} [LIST FILES bak vux, DELETE ALL]
+======================================================
+
+5: РАЗБИЕНИЕ СТРОК, ЛИСТЫ
+======================================================
+$env:path -split ";" or
+$env:path.split(";") > d:/esp_path.txt
+$path_esp = cat path_esp.txt; $path_esp | grep  NAME | foreach { $_; $env:path += $_;}
+
+$string_with_whitespace -split "\s+"; [SPLIT WHITESPACE] 
+$path_choco = $env:path -split ";" | grep choco; echo $path_choco; start $path_choco [OPEN DIRECTORY FROM GREP]
+======================================================
+
+6: ПЕРЕМЕННЫЕ
+======================================================
+REFRESH ENV: - refreshenv
+
+set variable permanently in env:
+setx mypath 50; refreshenv; echo $env:mypath
+
+C# powershell net5 class to Environment manipulate
+[System.Environment]::SetEnvironmentVariable('ResourceGroup','AZ_Resource_Group')
+
+[Environment]::SetEnvironmentVariable("TT1", 220, [System.EnvironmentVariableTarget]::Machine)
+[Environment]::SetEnvironmentVariable(env, val, [System.EnvironmentVariableTarget]::User)
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\bin", "Machine")
+
+//SETX
+setx var_name Brand1 // set local variable 
+setx var_name Brand1 /m set global variable 
+setx MYPATH %PATH%
+setx MYPAHT ~PATH~
+
+$env:SCOOP='C:\scoop'; [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User'); iwr -useb get.scoop.sh | iex
+======================================================
+
+7: ПОКАЗАТЬ УСТРОСТВА
+======================================================
+Get-PnpDevice [GET_DEVICE_LIST]
+[-FriendlyName <String[]>] [-Class <String[]>] [-PresentOnly]
+[-Status <String[]>]
+[-CimSession <CimSession[]>]
+[-ThrottleLimit <Int32>]
+[-AsJob]
+[<CommonParameters>]
+
+Get-PnpDevice -PresentOnly -Status ERROR,DEGRADED,UNKNOWN
+Get-PnpDevice -FriendlyName 'Generic USB Hub'
+Get-PnpDevice -InstanceId 'USB\VID_8087&PID_0024\5&3541780&0&1'
+Get-PnpDevice -Class 'Mouse'
+======================================================
+
+8: НАСТРОЙКА СЕТИ
+======================================================
+Просмотр сетевых настроек
+Get-NetIPConfiguration -All -Detailed  "IPConfig"
+
+Просмотр сетевых подключений
+Get-NetTCPConnection -State Established -AppliedSettings Internet | ft -auto  "NetStat"
+
+Настройка сетевого интерфейса
+Get-NetIPAddress -InterfaceIndex 3 -AddressFamily IPv4  "просмотр"  "NetSH"
+Set-NetIPInterface -InterfaceIndex 3 -Dhcp disabled  "отключение DHCP"
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1
+Set-DNSClientServerAddress -InterfaceIndex3 -ServerAddresses (?8.8.8.8?)
+
+для изменения настроек надо удвлять старые потом создавать новые 
+Remove-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.12 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false
+======================================================
+

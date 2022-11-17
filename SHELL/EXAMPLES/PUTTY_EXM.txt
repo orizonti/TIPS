@@ -1,0 +1,5 @@
+putty.exe -serial com1
+putty.exe -load "session name"
+putty -telnet -P 9696 host.name
+                   -sercfg 115200,8,n,1,N             
+plink -serial COM9 -sercfg 115200,8,1,N,N

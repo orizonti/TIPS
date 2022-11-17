@@ -1,0 +1,28 @@
+host_names
+bromswork 25.34.64.59
+note      25.49.217.216
+
+
+ssh rem_broms@25.34.64.59 -p 2222
+
+scp опции пользователь1@хост1:файл пользователь2@хост2:файл
+1 - использовать протокол SSH1;
+-2 - использовать протокол SSH2;
+-B - пакетный режим для передачи нескольких файлов;
+-C - включить сжатие;
+- l - установить ограничение скорости в кбит/сек;
+-o - задать нужную опцию SSH;
+-p - сохранять время модификации;
+-r - рекурсивное копирование директорий;
+-v - более подробный режим.
+
+scp /broms//file root@losst.ru:/root/
+
+ssh-keygen
+ssh-copy-id rem_broms@25.34.64.59
+
+ssh-copy-id broms@25.49.217.216
+/mnt/c/Users/broms/.ssh/id_rsa
+sudo vim /etc/ssh/sshd_config
+scp broms@bromswork:path_file /mnt/c/Users/broms
+scp -P 2222 broms@bromswork:/home/broms/DEVELOPMENT/AstraTraineeProject/build/TraineeProjectSource/TraineeProjectExecutable /mnt/c/Users/broms

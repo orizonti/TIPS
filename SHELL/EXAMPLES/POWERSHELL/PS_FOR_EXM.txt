@@ -1,0 +1,8 @@
+$path_esp = cat path_esp.txt; $path_esp | grep  NAME | foreach { $_; $env:path += $_;}
+----------------------------------------------------------------------------------------------
+1..20 | foreach { ping 192.168.2.$_ -w 1 -n 2 | grep -e "%" -e "ping"; echo "ping 192.168.2.$_"; } {1..20 = seq 20}
+----------------------------------------------------------------------------------------------
+$DIRS = SOURCE_DIR:DST_DIR; $DIRS_LIST | ForEach -Parallel { $paths = $_.split(":"); rsync -uq --recursive --update $paths[0] $paths[1];}
+----------------------------------------------------------------------------------------------
+ls -recurse -name | rg -e bak -e vux | foreach {echo ("TO_DELETE  " + $_); rm $_} [LIST FILES bak vux, DELETE ALL]
+----------------------------------------------------------------------------------------------

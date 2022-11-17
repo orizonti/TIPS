@@ -1,0 +1,40 @@
+sudo apt -y install build-essential
+
+libc6-dev - заголовочные файлы стандартной библиотеки Си;
+libstdc++6-dev - заголовочные файлы стандартной библиотеки С++;
+gcc - компилятор языка программирования Си;
+g++ - компилятор языка программирования C++;
+make - утилита для организации сборки нескольких файлов;
+dpkg-dev - инструменты сборки пакетов deb.
+
+
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && sudo apt update
+sudo apt -y install gcc-snapshot && sudo apt -y install gcc-11 g++-11
+
+REMOTE COMPILER
+sudo apt purge -y build-essential && sudo apt-y autoremove
+
+
+BUILD_FROM_SOURCE
+wget source
+./contrib/downloadpreq..
+./configure -prefix=/usr/local/gcc-11
+            --disable-multilib
+            --with_include_prefix=/usr/local/include 
+            --enable-languages=C,C++
+make; make install 
+
+
+//==============================================================
+CLANG
+
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.3/llvm-project-15.0.3.src.tar.xz
+cd llvm-project; mkdir build; cd build; 
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=release ../llvm
+
+
+Installing: /usr/local/include/llvm
+            /usr/local/lib/cmake/llvm
+            /usr/local/lib/lib*
+            /usr/local/bin/llvm-config
+            /usr/local/bin/*

@@ -1,0 +1,14 @@
+//=======================================================
+putty.exe -serial com1
+
+putty.exe -load "session name"
+putty -telnet -P 9696 host.name
+
+Any single digit from 5 to 9 sets the number of data bits.
+‘1’, ‘1.5’ or ‘2’ sets the number of stop bits.
+Any other numeric string is interpreted as a baud rate.
+A single lower-case letter specifies the parity: ‘n’ for none, ‘o’ for odd, ‘e’ for even, ‘m’ for mark and ‘s’ for space.
+A single upper-case letter specifies the flow control: ‘N’ for none, ‘X’ for XON/XOFF, ‘R’ for RTS/CTS and ‘D’ for DSR/DTR.
+
+                   -sercfg 115200,8,n,1,N             
+plink -serial COM9 -sercfg 115200,8,1,N,N

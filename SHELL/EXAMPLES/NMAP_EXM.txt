@@ -1,0 +1,1 @@
+nmap -sP 192.168.43.1-220; nmap -sP 192.168.43.0/24; [NMAP SCAN IP RANGE]

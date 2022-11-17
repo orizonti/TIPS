@@ -1,0 +1,11 @@
+Get-NetIPConfiguration -All -Detailed  "IPConfig"
+--------------------------------------------------
+Get-NetTCPConnection -State Established -AppliedSettings Internet | ft -auto  "NetStat" [GET CONNECTION]
+--------------------------------------------------
+Get-NetIPAddress -InterfaceIndex 3 -AddressFamily IPv4  "просмотр"  "NetSH"
+Set-NetIPInterface -InterfaceIndex 3 -Dhcp disabled  "отключение DHCP"
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1
+Set-DNSClientServerAddress -InterfaceIndex3 -ServerAddresses (?8.8.8.8?)
+--------------------------------------------------
+Remove-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.12 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false

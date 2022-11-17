@@ -1,0 +1,3 @@
+new-item -itemtype symboliclink -path ref_dst -target .\dst\dst2\
+cmd /c mklink /D DIR_REF /DIR_DST
+cmd /c mklink FILE_REF /FILE_DST

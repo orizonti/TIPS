@@ -1,0 +1,3 @@
+resmon - просмотр кто открыл файл
+taskmgr - диспетчер задач
+diskmgmt.msc

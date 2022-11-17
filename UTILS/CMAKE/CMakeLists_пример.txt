@@ -1,0 +1,63 @@
+﻿# CMakeList.txt: проект CMake для TestCmakeProject; включите исходный код и определения,
+# укажите здесь логику для конкретного проекта.
+#
+cmake_minimum_required (VERSION 3.8)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(UNICODE 1)
+set(WIN32 1)
+set(WIN64 1)
+set(QT_NO_DEBUG 1)
+set(NDEBUG 1)
+set(QT_CORE_LIB 1)
+set(QT_GUI_LIB 1)
+set(QT_NETWORK_LIB 1)
+set(QT_SERIALPORT_LIB 1)
+set(QT_WIDGETS_LIB 1)
+set(QT_PRINTSUPPORT_LIB 1)
+message("Export compile commands")
+
+if(CMAKE_VERSION VERSION_LESS "3.7.0")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
+
+list(APPEND CMAKE_PREFIX_PATH ${QT_LIBRARY_PATH})
+
+if(EXISTS "D:/PROGRAM_LIBRARY/Qt515/5.15.2/msvc2019_64")
+set(QT_LIBRARY_PATH "D:/PROGRAM_LIBRARY/Qt515/5.15.2/msvc2019_64")
+endif()
+
+if(EXISTS "c:/qt/5.14.0/msvc2017_64")
+set(QT_LIBRARY_PATH  "c:/qt/5.14.0/msvc2017_64")
+endif()
+
+
+list(APPEND CMAKE_PREFIX_PATH ${QT_LIBRARY_PATH})
+set(Qt5Core_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5Core")
+set(Qt5Gui_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5Gui")
+set(Qt5Network_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5Network")
+set(Qt5PrintSupport_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5PrintSupport")
+set(Qt5SerialPort_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5SerialPort")
+set(Qt5Widgets_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5Widgets")
+set(Qt5_DIR ${QT_LIBRARY_PATH}"lib/cmake/Qt5")
+message("SET QT LIBRARY - "${Qt5_DIR})
+
+
+
+find_package(Qt5 COMPONENTS Widgets Network Core SerialPort REQUIRED)
+# Добавьте источник в исполняемый файл этого проекта.
+
+add_executable (TestCmakeProject "main.cpp" "MainWindowClass.cpp" "main.h")
+
+target_link_libraries(TestCmakeProject Qt5::Widgets)
+target_link_libraries(TestCmakeProject Qt5::Network)
+target_link_libraries(TestCmakeProject Qt5::Core)
+target_link_libraries(TestCmakeProject Qt5::SerialPort)
+
+# TODO: Добавьте тесты и целевые объекты, если это необходимо.

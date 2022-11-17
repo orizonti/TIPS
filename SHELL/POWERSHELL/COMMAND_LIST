@@ -1,0 +1,90 @@
+Справка
+Get-Help Get-Content -Detailed 
+Get-Command  "list all cmdlet"
+Get-Alias    "list all alias to cmdlet"
+
+Перемещение по файловой системе
+Get-Location "gl, pwd"
+Set-Locatin  "sl, cd, chdir"
+Push-Location "pushd"
+Pop-Location  "popd"
+
+
+Get-ChildItem -Force C:\
+Get-ChildItem -Force C:\ -Recurse
+Get-ChildItem позволяет отфильтровать элементы при помощи параметров Path, Filter, Include и Exclude
+dir -filter *доугерти*.pdf -recurse "list folder and filtered file" 
+
+Копирование файлов и папок
+Copy-Item -Path c:\boot.ini -Destination c:\boot.bak
+Copy-Item -Path c:\boot.ini -Destination c:\boot.bak -Force		 "to rewrite file"
+Copy-Item C:\temp\test1 -Recurse c:\temp\DeleteMe			 "recursive copy folder"
+Copy-Item -Filter *.txt -Path c:\data -Recurse -Destination c:\temp\text "copy with filter ony *.txt"
+xcopy c:\dir1 d:\  /s - 
+
+
+Создание файлов и папок
+New-Item -Path 'C:\temp\New Folder' -ItemType "directory"
+New-Item -Path 'C:\temp\New Folder\file.txt' -ItemType "file"            "create hollow file"
+
+Удаление всех файлов и папок, содержащихся в папке
+Remove-Item C:\temp\DeleteMe            "ri, del, erase, rmdir, rd, rm"
+Remove-Item C:\temp\DeleteMe -Recurse   ""
+
+Переименование 
+Rename-Item  "rni, ren" 
+
+Перемещение
+Move-Item - "mi, move, mv" 
+
+Отображение локальной папки в виде диска, доступного в Windows
+
+subst p: $env:programfiles
+
+Чтение текстового файла в массив
+Get-Content -Path C:\boot.ini
+Set-Content 					"write data to file"
+
+Процессы
+Get-Process  "list all process"  "gps, ps"
+Get-Process | Format-List * -Force ""
+Get-Process -ComputerName MYPC1 | Format-List * -Force  "процессы на удаленном компьютере"
+Остановка
+Stop-Process -Id 22608
+Stop-Process -name excel
+На удаленном
+             $Obj = Get-Process -Name excel -ComputerName MYPC1
+             PS C:\> Stop-Process -InputObject $Obj
+
+Службы
+Get-Service wwansvc, spooler
+Stop-Service -Name Spooler
+PS C:\> Start-Service -Name Spooler
+
+Сетевые команды
+Test-Connection -ComputerName SRV3         "ping"
+Test-Connection -ComputerName SRV3, SRV4
+Test-Connection -ComputerName (Get-Content serverlist.txt)
+
+Трассировка 
+Test-NetConnection -ComputerName ya.ru   "tracert"
+Test-NetConnection -ComputerName ya.ru -TraceRoute
+Test-NetConnection -ComputerName ya.ru -Port 80 -InformationLevel Detailed
+
+Просмотр сетевых настроек
+Get-NetIPConfiguration -All -Detailed  "IPConfig"
+
+Просмотр сетевых подключений
+Get-NetTCPConnection -State Established -AppliedSettings Internet | ft -auto  "NetStat"
+
+Настройка сетевого интерфейса
+Get-NetIPAddress -InterfaceIndex 3 -AddressFamily IPv4  "просмотр"  "NetSH"
+Set-NetIPInterface -InterfaceIndex 3 -Dhcp disabled  "отключение DHCP"
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1
+Set-DNSClientServerAddress -InterfaceIndex3 -ServerAddresses (?8.8.8.8?)
+
+для изменения настроек надо удвлять старые потом создавать новые 
+Remove-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.11 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false
+New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.12 -PrefixLength 24 -DefaultGateway 192.168.0.1 -Confirm:$false
+
+

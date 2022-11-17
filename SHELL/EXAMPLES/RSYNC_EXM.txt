@@ -1,0 +1,20 @@
+rsync -zvh file /tmp/backups/
+
+rsync -avz /home/sergiy/tmp/ root@192.168.56.102:/home/
+rsync -avz /home/sergiy/tmp/ rsync://192.168.56.102:/share
+
+rsync -avzhe ssh root@192.168.56.102:/root/install.log /tmp/
+rsync -avzhe "ssh -p 22" root@192.168.56.102:/root/install.log /tmp/
+
+rsync -avzhe ssh backup.tar root@192.168.0.101:/backups/
+
+rsync -avze ssh --include 'R*' --exclude '*' root@192.168.56.102:/root/documents/ /root/documents
+rsync -zarv --include "*/"  --include="*.sh" --exclude="*" SRC DST 
+
+rsync -avz --delete root@192.168.56.102:/documents/ /tmp/documents/
+rsync --remove-source-files -zvh backup.tar /tmp/backups/
+rsync -avzhe ssh --max-size='200k' /user/documents/ root@192.168.56.102:/root/documents
+
+
+
+

@@ -1,0 +1,91 @@
+rsync опции источник приемник
+rsync -zvh file /tmp/backups/
+rsync -zvh --progress file /tmp/backups/ "TO SEE PROGRESS"
+rsync -zvh /home/user/documents /tmp/backups/ "SYNCHRONIZE IN LOCAL MACHINE"
+rsync -azvh /home/user/documents /tmp/backups/ "ADD -a to SAVE FILE ATRIBUTES"
+СИНХРОНИЗАЦИЯ С УДАЛЕННЫМ СЕРВЕРОМ
+
+"COPY LOCAL FILES TO REMOTE SERVER"
+rsync -avz /home/sergiy/tmp/ root@192.168.56.102:/home/
+rsync -avz /home/sergiy/tmp/ rsync://192.168.56.102:/share
+
+СИНХРОНИЗАЦИЯ ФАЙЛОВ ПО SSH
+"GET FILES FROM REMOTE SERVER"
+rsync -avzhe ssh root@192.168.56.102:/root/install.log /tmp/
+rsync -avzhe "ssh -p 22" root@192.168.56.102:/root/install.log /tmp/
+
+"SEND FILE TO REMOTE SERVER"
+rsync -avzhe ssh backup.tar root@192.168.0.101:/backups/
+
+СИНХРОНИЗАЦИЯ НЕ ВСЕХ ФАЙЛОВ В RSYNC
+rsync -avze ssh --include 'R*' --exclude '*' root@192.168.56.102:/root/documents/ /root/documents
+rsync -zarv --include "*/"  --include="*.sh" --exclude="*" SRC DST 
+
+УДАЛЕНИЕ ПРИ СИНХРОНИЗАЦИИ
+удалять файлы, которых нет на машине откуда идет rsync
+rsync -avz --delete root@192.168.56.102:/documents/ /tmp/documents/
+
+МАКСИМАЛЬНЫЙ РАЗМЕР ФАЙЛОВ
+rsync -avzhe ssh --max-size='200k' /user/documents/ root@192.168.56.102:/root/documents
+
+УДАЛЕНИЕ ИСХОДНЫХ ФАЙЛОВ
+rsync --remove-source-files -zvh backup.tar /tmp/backups/
+
+ОГРАНИЧИТЬ СКОРОСТЬ ПЕРЕДАЧИ
+rsync --bwlimit=100 -avzhe ssh /user/home/documents/ root@192.168.56.102:/root/documents/
+ 
+АВТОМАТИЧЕСКАЯ СИНХРОНИЗАЦИЯ ПАПОК RSYNC
+ssh-keygen -t rsa
+ssh-copy-id -i /home/sk/.ssh/id_rsa.pub sk@192.168.1.250
+crontab -e
+00 05 * * * rsync -azvre ssh /home/user/Downloads/ 192.168.56.102:/sharec
+
+ВЗЯТЬ КОПИРУЕМЫЕ ДИРЕКТОРИИ ИЗ ФАЙЛОВ
+rsync -vu `cat rsync-src-files` /mnt/d/rsync_test/
+rsync -vu --recursive --files-from=rsync-src-files . /mnt/d/rsync_test/
+
+ПАРАЛЛЕЛЬНОЕ ВЫПОЛНЕНИЕ
+cat MOVE_DIRS.txt | parallel rsync {} --recursive -vu ~/TEST_DST
+POWERSHELL
+cat .\list.txt | ForEach -Parallel {rsync -uv --update $_ TEST_DST}
+
+
+-u - Не перезаписывать более новые файлы;
+-v - Выводить подробную информацию о процессе копирования;
+-q - Минимум информации;
+-t - Сохранять время модификации;
+--progress - Выводить прогресс передачи файла;
+-h, --human-readable 
+
+УСКОРЕНИЕ РАБОТЫ
+--size-only              skip files that match in size
+
+--files-from=FILE       read list of source-file names from FILE
+--stat - Показать статистику передачи;
+--recursive - Перебирать директории рекурсивно;
+--exclude - Исключить файлы по шаблону;
+--delete delete extraneous files from destination dirs
+--update -u skip files that are newer on the receiver
+--inplace update destination files in-place (SEE MAN PAGE)
+--append append data onto shorter files
+--relative -R  use relative path names
+-d, --dirs                  transfer directories without recursing
+
+-c - Проверка контрольных сумм для файлов;
+-a - Режим архивирования, когда сохраняются все атрибуты оригинальных файлов;
+-R - Относительные пути;
+-b - Создание резервной копии;
+-l - Копировать символьные ссылки;
+-L - Копировать содержимое ссылок;
+-H - Копировать жесткие ссылки;
+-p - Сохранять права для файлов;
+-g - Сохранять группу;
+
+-x - Работать только в этой файловой системе;
+-e - Использовать другой транспорт, например, ssh;
+-z - Сжимать файлы перед передачей;
+--delete - Удалять файлы которых нет в источнике;
+
+--no-recursive - Отключить рекурсию;
+--version - Версия утилиты.
+

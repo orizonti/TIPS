@@ -1,0 +1,7 @@
+find Pictures/tecmint/ -name "*.png" -type f -print0 | xargs -0 tar -cvzf images.tar.gz
+cut -d: -f1 < /etc/passwd | sort | xargs
+find Downloads -name "DomTerm" -type d -print0 | xargs -0 /bin/rm -v -rf "{}"
+find . -name "net_stats" -type f -print0 | xargs -0 /bin/rm -v -rf "{}"
+echo ./Templates/ ./Documents/ | xargs -n 1 cp -v ./Downloads/SIC_Template.xlsx 
+
+

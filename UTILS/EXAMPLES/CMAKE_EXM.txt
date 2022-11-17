@@ -1,0 +1,6 @@
+cmake --build . --target myexe --config Release
+cmake --build . --target install
+
+cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DESP_PLATFORM=1 --warn-uninitialized -DCCACHE_ENABLE=0 c:\tools\esp32-latest\esp\hello_world
+cmake .. -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_SYSROOT=$HOME/root -DCMAKE_STAGING_PREFIX=/tmp/package
+

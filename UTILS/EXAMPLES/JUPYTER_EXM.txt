@@ -1,0 +1,12 @@
+jupyter notebook --no-browser --port=8889 --ip=192.168.3.111
+jupyter notebook password
+
+ssh -N -L localhost:8888:localhost:8889 rem_broms@192.168.3.111
+
+~/.jupyter
+c.NotebookApp.certfile = u'/absolute/path/to/your/certificate/fullchain.pem'
+c.NotebookApp.keyfile = u'/absolute/path/to/your/certificate/privkey.pem'
+c.NotebookApp.ip = '*' [BIND ALL INTERFACES TO IP]
+c.NotebookApp.password = u'sha1:bcd259ccf...<your hashed password here>'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 9999 [FIXED PORT]

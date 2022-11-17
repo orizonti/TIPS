@@ -1,0 +1,89 @@
+Rvalue references
+C++11 introduces a new reference termed the rvalue reference. An rvalue reference to T, which is a non-template type parameter (such as int, or a user-defined type), is created with the syntax T&&. Rvalue references only bind to rvalues.
+
+Type deduction with lvalues and rvalues:
+
+int x = 0; // `x` is an lvalue of type `int`
+int& xl = x; // `xl` is an lvalue of type `int&`
+int&& xr = x; // compiler error -- `x` is an lvalue
+int&& xr2 = 0; // `xr2` is an lvalue of type `int&&` -- binds to the rvalue temporary, `0`
+
+void f(int& x) {}
+void f(int&& x) {}
+
+f(x);  // calls f(int&)
+f(xl); // calls f(int&)
+f(3);  // calls f(int&&)
+f(std::move(x)); // calls f(int&&)
+
+f(xr2);           // calls f(int&)
+f(std::move(xr2)); // calls f(int&& x)
+See also: std::move, std::forward, forwarding references.
+
+Forwarding references
+Also known (unofficially) as universal references. A forwarding reference is created with the syntax T&& where T is a template type parameter, or using auto&&. This enables perfect forwarding: the ability to pass arguments while maintaining their value category (e.g. lvalues stay as lvalues, temporaries are forwarded as rvalues).
+
+Forwarding references allow a reference to bind to either an lvalue or rvalue depending on the type. Forwarding references follow the rules of reference collapsing:
+
+T& & becomes T&
+T& && becomes T&
+T&& & becomes T&
+T&& && becomes T&&
+auto type deduction with lvalues and rvalues:
+
+int x = 0; // `x` is an lvalue of type `int`
+auto&& al = x; // `al` is an lvalue of type `int&` -- binds to the lvalue, `x`
+auto&& ar = 0; // `ar` is an lvalue of type `int&&` -- binds to the rvalue temporary, `0`
+Template type parameter deduction with lvalues and rvalues:
+
+// Since C++14 or later:
+void f(auto&& t) {
+  // ...
+}
+
+// Since C++11 or later:
+template <typename T>
+void f(T&& t) {
+  // ...
+}
+
+int x = 0;
+f(0); // T is int, deduces as f(int &&) => f(int&&)
+f(x); // T is int&, deduces as f(int& &&) => f(int&)
+
+int& y = x;
+f(y); // T is int&, deduces as f(int& &&) => f(int&)
+
+int&& z = 0; // NOTE: `z` is an lvalue with type `int&&`.
+f(z); // T is int&, deduces as f(int& &&) => f(int&)
+f(std::move(z)); // T is int, deduces as f(int &&) => f(int&&)
+
+
+// forward example
+#include <utility>      // std::forward
+#include <iostream>     // std::cout
+
+// function with lvalue and rvalue reference overloads:
+void overloaded (const int& x) {std::cout << "[lvalue]";}
+void overloaded (int&& x) {std::cout << "[rvalue]";}
+
+// function template taking rvalue reference to deduced type:
+template <class T> void fn (T&& x) {
+  overloaded (x);                   // always an lvalue
+  overloaded (std::forward<T>(x));  // rvalue if argument is rvalue
+}
+
+int main () {
+  int a;
+
+  std::cout << "calling fn with lvalue: "; fn (a);
+  std::cout << "calling fn with rvalue: "; fn (0);
+
+  return 0;
+}
+
+Output:
+calling fn with lvalue: [lvalue][lvalue]
+calling fn with rvalue: [lvalue][rvalue]
+
+

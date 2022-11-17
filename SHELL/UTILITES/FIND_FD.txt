@@ -1,0 +1,60 @@
+fd netfl -> Software/python/imdb-ratings/netflix-details.py
+fd '^x.*rc$' -> X11/xinit/xinitrc
+                X11/xinit/xserverrc
+
+fd passwd /etc -> /etc/default/passwd :SEARCH IN etc DIR
+                  /etc/pam.d/passwd
+                  /etc/passwd
+
+fd -> testenv        :LIST ALL FILES IN 
+      testenv/mod.rs :CURRENT DIR RECURSIVELY
+      tests.rs
+
+fd . fd/tests/ -> testenv        :LIST ALL IN DIRECTORY
+                  testenv/mod.rs
+                  tests.rs
+
+fd -e md -> CONTRIBUTING.md :SERACH FILE EXTENSION
+            README.md
+
+fd -e rs mod -> src/fshelper/mod.rs
+                src/lscolors/mod.rs
+                tests/testenv/mod.rs
+
+fd -g -> libc.so /usr       :SEARCH PARTICULARY FILE
+         /usr/lib32/libc.so
+         /usr/lib/libc.so
+
+SEARCH HIDDEN FILES
+fd -H pre-commit -> .git/hooks/pre-commit.sample
+
+
+fd num_cpu :fd NOD SEARCH FOLDERS IN .gitingnore
+fd -I num_cpu -> target/debug/deps/libnum_cpus :SUPRESS
+
+fd -p -g '**/.git/config' : MATCHING FULL PATH
+fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)'
+
+:COMMAND EXECUTION
+fd -e zip -x unzip -> unzip file1.zip :IN PARALLEL
+                      unzip backup/file2.zip
+fd -e h -e cpp -x clang-format -i
+fd -g 'test_*.py' -X vim :FIND ALL FILES py AND OPEN IN vim
+fd … -X ls -lhd --color=always : TO SEE DETAILS LIKE OWNERS
+fd … -l :SHORTCUT for ls
+
+fd -e jpg -x convert {} {.}.png : CONVERT ALL *.jpg TO *.png FILES
+//{} is a placeholder for the search result. {.} is the same, without the file extension
+
+For -x/--exec, -j/--threads :SET NUMBER PARALLEL THREADS --threads=1 for serial execution.
+
+FIND FILES AND SEARCH DATA WITHIN
+fd -e cpp -e cxx -e h -e hpp -X rg 'std::cout' :USING ripgrep
+
+
+PLACEHOLDER SYNTAX
+{}:  (documents/images/party.jpg)
+{.}: (documents/images/party)
+{/}: (party.jpg)
+{//}: (documents/images)
+{/.}: (party)

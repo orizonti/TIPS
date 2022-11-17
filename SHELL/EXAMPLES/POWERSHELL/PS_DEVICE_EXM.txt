@@ -1,0 +1,4 @@
+Get-PnpDevice -PresentOnly -Status ERROR,DEGRADED,UNKNOWN
+Get-PnpDevice -FriendlyName 'Generic USB Hub'
+Get-PnpDevice -InstanceId 'USB\VID_8087&PID_0024\5&3541780&0&1'
+Get-PnpDevice -Class 'Mouse'

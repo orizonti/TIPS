@@ -1,0 +1,1 @@
+nvidia-smi --query-gpu=timestamp,memory.free,memory.used --format=csv -lms 1000
