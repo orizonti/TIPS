@@ -20,9 +20,75 @@ scp /broms//file root@losst.ru:/root/
 
 ssh-keygen
 ssh-copy-id rem_broms@25.34.64.59
+IF DONT WOKR THEN COPY MANUAL
+cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
-ssh-copy-id broms@25.49.217.216
 /mnt/c/Users/broms/.ssh/id_rsa
 sudo vim /etc/ssh/sshd_config
 scp broms@bromswork:path_file /mnt/c/Users/broms
 scp -P 2222 broms@bromswork:/home/broms/DEVELOPMENT/AstraTraineeProject/build/TraineeProjectSource/TraineeProjectExecutable /mnt/c/Users/broms
+
+-----------------------------------------------------------------
+SSHFS
+sudo sshfs root@192.168.56.103:/ /mnt
+sudo groupadd fuse; sudo usermod -aG fuse $USER
+sshfs root@192.168.56.103:/ ~/mnt
+-----------------------------------------------------------------
+sshfs -o allow_other root@192.168.56.103:/ ~/mnt; sudo umount ~/mnt/
+ssh-copy-id -i ~/.ssh/id_dsa.pub root@192.168.56.103
+sshfs -o identityfile=~/.ssh/id_dsa.pub root@192.168.56.103:/ ~/mnt
+------------------------------------------------------------------
+/etc/fstab - 
+root@192.168.56.103:/ /mnt fuse.sshfs 
+noauto,x-systemd.automount,_netdev,follow_symlinks,
+identityfile=/home/sergiy/.ssh/id_dsa,allow_other,default_permissions,reconnect 0 0
+имя пользователя на локальной машине и на удалённой совпадали. 
+Или указать ID пользователя и группы владельца во время монтирования.
+cat /etc/passwd | grep $USER
+------------------------------------------------------------------
+
+NFS SERVER
+apt-get install nfs-kernel-server portmap
+vim /etc/exports [EXPORTS FILE]
+/home/proudlygeek  localhost(insecure,rw,sync,no_subtree_check)
+service nfs-kernel-server restart; OR exportfs -a
+
+NFS CLIENT
+apt-get install nfs-common portmap
+mkdir /mnt/nfs-share
+ssh -fNv -L 3049:localhost:2049 user@hostname
+mount -t nfs -o port=3049 localhost:/home/proudlygeek /mnt/nfs-share
+
+FORWARDING
+ssh -L 80:intra.example.com:80 gw.example.com
+ssh -L 127.0.0.1:80:intra.example.com:80 gw.example.com
+ssh -L 0.0.0.0:9999:127.0.0.1:80 user@remoteserver
+
+[LOCAL FORWARD LINK FROM LOCAL_HOST to REMOTE_LOCAL_HOST via INTERNET_SERVER]
+LOCAL_POCKETS -> LOCAL_HOST1:9999 -> HOST1:SSH_CLIENT:22 -> HOST2:SSH_SERVER:22 -> LOCAL_HOST2:5432
+
+/etc/ssh/sshd_config: -> AllowTcpForwarding yes //AT SERVER;
+HOST1: ssh -L 9999:localhost:5432 host2; AFTER; psql -h localhost -p 9999 -U postgres
+HOST1: ssh -L 0.0.0.0:9999:host3:5432 host2
+ANY_INPUT_POCKETS -> LOCAL_HOST1:9999 -> HOST1:SSH_CLIENT:22 -> HOST2:SSH_SERVER:22 -> LOCAL_HOST2:5432
+======================================================================================================   
+[REVERT FORWARD OPEN ACCESS to LOCAL_HOST via INTERNET_SERVER to REMOTE_HOST]
+POCKETS -> HOST2:9999 -> HOST2:SSH_SERVER:22 -> HOST1:SSH_CLIENT:22 -> LOCAL_HOST:5432
+
+HOST1: ssh -R 9999:localhost:5432 host2
+//SAYS to SSH_SERVER listen 9999 and send them to SSH_CLIENT that transmit them to LOCALHOST:5432
+
+[CHAIN]
+host1# ssh -L 9991:localhost:9992 host2; host2# ssh -L 9992:localhost:9993 host3; host3# ssh -L 9993:localhost:5432 host4
+
+[POCKETS -> HOST1:2222 -> HOST2:2222 ->HOST3:22 //SSH to HOST1:2222 connects to HOST3:SSH:22]
+host1# ssh -L 2222:localhost:2222 host2; host2# ssh -L 2222:host4:22 host3; ssh -p 2222 localhost;
+
+[SSH VPN]
+sudo ssh -w 5:5 root@host2
+host1# sudo ifconfig tun5 192.168.150.101/24 pointopoint 192.168.150.102
+host2# sudo ifconfig tun5 192.168.150.102/24 pointopoint 192.168.150.101
+
+
+
+

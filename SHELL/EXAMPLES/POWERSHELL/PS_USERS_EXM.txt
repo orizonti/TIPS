@@ -1,0 +1,27 @@
+Disable-LocalUser Enable-LocalUser
+Get-LocalGroup Get-LocalGroupMember Get-LocalUser //LIST ALL
+Get-LocalUser -Name ‘guest’ //GET PROPERTIES
+New-LocalGroup New-LocalUser
+Remove-LocalGroup Remove-LocalGroupMember Remove-LocalUser
+Rename-LocalGroup Rename-LocalUser
+Set-LocalGroup Set-LocalUser
+Add-LocalGroupMember
+===========================================================================
+Get-LocalUser -Name ‘guest’ | Select-Object *
+Get-LocalUser -Name ‘administrator’ | Select-Object PasswordLastSet
+$UserPassword = Read-Host –AsSecureString; New-LocalUser "User" -Password $UserPassword;
+$UserPassword = Read-Host –AsSecureString; Set-LocalUser -Name Administrator -Password $UserPassword –Verbose 
+Set-LocalUser -Name Netwrix –PasswordNeverExpires $False
+Remove-LocalUser -Name Netwrix -Verbose
+===========================================================================
+New-LocalGroup -Name 'Netwrix Users' -Description 'Netwrix Users Group'
+Add-LocalGroupMember -Group 'Administrators' -Member ('Netwrix',’Netwrix Users') –Verbose
+Get-LocalGroupMember -Group 'Netwrix Users'
+Remove-LocalGroupMember -Group 'Netwrix Users' –Member 'guest'
+=============ADDS, MODIFIES, PRINT======================
+net user username password /ADD
+net user /add John * //TYPE PASSWORD
+net user username password /ADD /DOMAIN
+net user username password /ADD /FULLNAME:"User_Fullname"
+net user username password /ADD /PASSWORDCHG:Yes //To allow user to change password
+net user username password /ADD /EXPIRES:never

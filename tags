@@ -1,0 +1,38 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	D:/TIPS/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/80ee839/
+CMAKE_AUTOMOC	./UTILS/CMAKE/CMakeLists.txt	/^set(CMAKE_AUTOMOC ON)$/;"	v
+CMAKE_PREFIX_PATH	./UTILS/CMAKE/CMakeLists.txt	/^    set(CMAKE_PREFIX_PATH "\/mnt\/d\/PROGRAM_LIBRARY\/linux\/QT5.15.2\/5.15.2\/gcc_64")$/;"	v
+CMAKE_PREFIX_PATH	./UTILS/CMAKE/CMakeLists.txt	/^  set(CMAKE_PREFIX_PATH "D:\/PROGRAM_LIBRARY\/Qt515\/5.15.2\/mingw81_64")$/;"	v
+CMAKE_PREFIX_PATH	./UTILS/CMAKE/CMakeLists.txt	/^  set(CMAKE_PREFIX_PATH "D:\/PROGRAM_LIBRARY\/Qt515\/5.15.2\/msvc2019_64")$/;"	v
+CONSOLE_FLAG	./get-tip.ps1	/^$CONSOLE_FLAG = 0$/;"	v
+CONSOLE_FLAG	./get-tip.ps1	/^$CONSOLE_FLAG = 1;$/;"	v
+EXAMPLE_NAME	./get-tip.ps1	/^$EXAMPLE_NAME = "LIST"$/;"	v
+EXAMPLE_NAME	./get-tip.ps1	/^$EXAMPLE_NAME = $args[1].toUpper()$/;"	v
+INSTALL_EXAMPLEDIR	./UTILS/CMAKE/CMakeLists.txt	/^set(INSTALL_EXAMPLEDIR "D:\/STORAGE\/YandexDisk\/DEVELOPMENT\/PROJECTS\/TEST_PROJECT_DIR\/QT_EXA/;"	v
+QT_CORE_LIB	./UTILS/CMAKE/CMakeLists.txt	/^set(QT_CORE_LIB 1)$/;"	v
+QT_DIR	./UTILS/CMAKE/CMakeLists.txt	/^set(QT_DIR "${CMAKE_PREFIX_PATH}\/lib\/cmake\/Qt5")$/;"	v
+Qt5	./UTILS/CMAKE/CMakeLists.txt	/^set(Qt5 "${CMAKE_PREFIX_PATH}\/Qt5")$/;"	v
+Qt5Core_DIR	./UTILS/CMAKE/CMakeLists.txt	/^set(Qt5Core_DIR "${CMAKE_PREFIX_PATH}\/Qt5Core")$/;"	v
+Qt5Test	./UTILS/CMAKE/CMakeLists.txt	/^set(Qt5Test "${CMAKE_PREFIX_PATH}\/Qt5Test")$/;"	v
+TAG_NAME	./get-tip.ps1	/^$TAG_NAME = "ALL"$/;"	v
+TAG_NAME	./get-tip.ps1	/^$TAG_NAME = $args[0].toUpper()$/;"	v
+TEST_TO_PROJECT	./UTILS/CMAKE/CMakeLists.txt	/^add_executable(TEST_TO_PROJECT tests.cpp )$/;"	t
+TEST_TO_PROJECT	./UTILS/CMAKE/CMakeLists.txt	/^project(TEST_TO_PROJECT LANGUAGES CXX)$/;"	p
+examples_dir	./get-tip.ps1	/^                    $examples_dir = Get-ChildItem ($root) -recurse -directory -name | grep "EXAM/;"	v
+examples_dir	./get-tip.ps1	/^                    if($TAG_NAME -notlike "ALL") {$examples_dir = ($examples_dir | grep $TAG_NAM/;"	v
+examples_dir	./get-tip.ps1	/^$examples_dir= ""; if($EXAMPLE_NAME -like "LIST") $/;"	v
+items	./get-tip.ps1	/^                                              $items = (Get-ChildItem ($root + $_) -file -name)./;"	v
+list	./get-tip.ps1	/^$list = Get-ChildItem $root -recurse -name -file | grep ($EXAMPLE_NAME+ "_EXM.txt") $/;"	v
+root	./get-tip.ps1	/^$root = "D:\/TIPS\/" $/;"	v
+root	./get-tip.ps1	/^if(test-path D:\/STORAGE\/YandexDisk\/TIPS) {$root = "D:\/STORAGE\/YandexDisk\/TIPS"}$/;"	v
+root	./get-tip.ps1	/^if(test-path D:\/TIPS) {$root = "D:\/TIPS\/"}$/;"	v
+template-app	./UTILS/CMAKE/cmake_tips.cmake	/^project(template-app)$/;"	p

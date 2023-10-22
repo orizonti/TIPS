@@ -1,0 +1,10 @@
+sudo mount --bind /mnt/e ~/MEDIA_STORAGE // DIR to DIR
+sudo mount -t drvfs E: /mnt/e //WSL FLASH DRIVE
+sudo mount -v -t ext4 /dev/sdb6 /mnt
+sudo mount --uuid="b386d309-05c1-42c8-8364-8d37270b69e0" /mnt
+sudo mount --label="home" /mnt/
+sudo mount ~/file.iso /mnt
+mount //LIST ALL MOUNTED
+umount: /mnt: target is busy -> lsof -w /mnt; lsof -w /dev/sdb6
+sudo umount -l /mnt //FORCE UMOUNT
+

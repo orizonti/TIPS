@@ -1,0 +1,11 @@
+git config --global user.name "orizonti"; git config --global user.email "orizonti@inbox.ru"
+git clone git@gitflic.ru:orizonti/astra-trainee-project.git; 
+git remote add origin git@github.com:orizonti/AstraTraineeProject.git; //TO SSH 
+[github.com -> orizonti -> Settings -> SSH and CPG keys -> PASTE ~/.ssh/rsa_key.pub]
+git remote rename origin new-origin; 
+git remote -v; git remote show origin;
+git remote add origin git@gitflic.ru:orizonti/astra-trainee-project.git //GITFLIC
+======================================================
+git add .; git commit -m "Initial commit" ; git status; git log --oneline; 
+git push -u origin master; git push -u origin --all; git push -u origin --tags
+git fetch origin; //RECEIVE CHANGES; git pull = git fetch + git merge

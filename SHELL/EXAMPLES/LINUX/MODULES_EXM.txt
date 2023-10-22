@@ -1,0 +1,12 @@
+sudo lsmod | grep vbox; modinfo fuse;
+insmod /path/to/module.ko //WITHOUT DEPENDENTIES
+modprobe module_name // LOOK /lib/modules/$(uname -r), LOAD DEPENTENTIES
+modprobe rt73usb nohwcrypt=0 //LOAD WITH PARAMETERS [modinfo to get]
+rmmod module_name;  modprobe -r vboxdrv //REMOVE 
+find /lib/modules/`uname -r` -name ‘*.ko’ //FIND MODULES
+sudo vi /etc/modprobe.d/blacklist.conf // BLOCK MODULES
+sudo vi /etc/modules.load.d/modules.conf // AUTOLOADS MODULES
+DKMS (Dynamic Kernel Module Support)
+firmware: rt73.bin //MEANS MODULE NEED MICROPROGRAM FROM "/lib/firmware"
+depmod //creates a Makefile-like dependency file to modprobe
+dmesg | tail -n1 //LOOK ERRORS WITH MODULES "/var/log/messages"

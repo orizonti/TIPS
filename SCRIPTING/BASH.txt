@@ -1,0 +1,2 @@
+now="$(date)"; echo "Today is $now"; printf "Today is %s\n" "$(date)" //VAR ASSIGN WITH COMMAND OUTPUT
+my_var=$(command \ arg1 \); echo "$my_var" //MULTILINE COMMAND

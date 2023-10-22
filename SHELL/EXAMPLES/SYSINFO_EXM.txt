@@ -1,0 +1,16 @@
+ls -l /dev/disk/by-uuid/
+blkid /dev/sd*
+lsblk -f | grep -v loop
+
+lscpu lspci lsusb lsscsi lshw
+lspci | grep audio
+lspci | grep VGA
+lspci -s 00:02.0 :SLOT FILTER
+lspci -vv | grep Kernel :GET DRIVER
+
+lsusb -s 001:002
+lsusb -d 80ee:0021
+
+sudo lshw | grep \* :GET DEV CLASSES
+sudo lshw -class display
+sudo lshw -class network

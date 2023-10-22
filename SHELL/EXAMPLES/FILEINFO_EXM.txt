@@ -1,0 +1,6 @@
+==========================
+test -f /mnt/d/DEVELOPMENT/DATA/NN_MODELS/GRU_120_3_18F.onnx && echo exists
+file /mnt/d/DEVELOPMENT/DATA/NN_MODELS/GRU_120_3_18F.onnx 
+ls -lh filename
+stat CMakeLists.txt
+==========================

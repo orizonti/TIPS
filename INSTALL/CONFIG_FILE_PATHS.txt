@@ -1,0 +1,27 @@
+HOSTS
+C:\Windows\System32\drivers\etc\hosts
+/etc/hosts; /etc/hostname
+
+SSH
+/etc/ssh/ssh_config
+
+MOUNT
+/etc/fstab
+
+USER GROUP
+/etc/group; etc/passwd; /etc/sudoers
+$XDG_CONFIG_HOME -> /home/(username)/.config //USER CONFIGS
+
+LIBRARIES
+/etc/ld.so.conf
+
+
+SHELL
+~/.zshrc; ~/.bashrc
+
+BOOT
+/etc/default/grub
+
+VIM
+$HOME/.vimrc; $HOME/.editor //DEFAULT EDITOR
+ 

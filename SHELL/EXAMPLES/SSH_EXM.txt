@@ -1,8 +1,0 @@
-ssh rem_broms@25.34.64.59 -p 2222
-scp /broms//file root@losst.ru:/root/
-scp broms@bromswork:path_file /mnt/c/Users/broms
-scp -P 2222 broms@bromswork:./../TraineeProjectExecutable /mnt/c/Users/broms
-
-ssh-keygen
-ssh-copy-id broms@25.49.217.216
-sudo vim /etc/ssh/sshd_config

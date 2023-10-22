@@ -1,13 +1,14 @@
-fd netfl 
-fd passwd /etc   :SEARCH IN etc DIR
-fd -> testenv    :LIST ALL FILES IN 
+fd fl -H[hidden] -i[ignor case] [-t f d x l s(socket) p(pipe) e(empty)]
 fd -e md         :SERACH FILE EXTENSION
+fd "^hosts$" C:/ :EXACT MATCH
+fd -t d -d 2 DIR_NAME :SERACH DIR,MAX DEPTH 2
+fd passwd /etc   :SEARCH IN etc DIR
 fd -e rs mod     :src/fshelper/mod.rs
 fd -p -g '**/.git/config' : MATCHING FULL PATH
 fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)'
-
 fd -e zip -x unzip :COMMAND EXECUTION
 fd -g 'test_*.py' -X vim        :FIND ALL FILES py AND OPEN IN vim
 fd -e jpg -j=4 -x convert {} {.}.png :CONVERT ALL *.jpg TO *.png FILES
 fd -e cpp -e cxx -e h -e hpp -X rg 'std::cout' :USING ripgrep
-
+fd "^foo" :FIND FILES BEGINS WITH foo
+fd -d 1 -E nam* :LIST ALL FILES IN DIR, EXCLUDE name, nammel 

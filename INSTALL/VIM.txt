@@ -1,0 +1,12 @@
+VIM CONFIG PATH: $HOME/.vimrc //LINUX $HOME/_vimrc //WINDOWS
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim --version //GET INSTALL INFO
+
+NEOVIM
+SAVE_NEOVIM_DISTRO to ANY_NVIM_DIR
+ln -s ANY_NVIM_DIR/bin/nvim ~/usr/bin/nvim
+NVIM_CONFIG_PATH: $HOME/.config/nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+
+ 

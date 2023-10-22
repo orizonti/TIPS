@@ -1,0 +1,28 @@
+ip OPTIONS OBJECTS COMMAND PARAM_COMMAND
+OPTIONS [-color -c; -brief -br; -details -d; -human -h; -oneline -o; -resolve -r(NAMES DNS), -stats -s;(statistics)]
+OBJECTS [ address a; link l #DEVICES; neighbour neigh #ARP; route r; rule ru #ROUTING; tunnel t; ]
+COMMAND [add, change, del delete, flush, get, list show, monitor, replace, restore, save, set, update]
+ip a; ip addr show // LIST IP ADDRESSES
+ip -br a show //LIST BRIEF
+ip a show enp0s3; ip a show dev enp0s3// SHOW ADDR for INTERFACE enp0s3
+ip a show dev enp0s3 permanent; ip a show dev enp0s3 dynamic; // SHOW ONLY DYNAMIC OR STATIC ADDRESESS
+ip addr add 10.0.2.100/255.255.255.0 dev enp0s3; ip addr add 10.0.2.100/24 dev enp0s3; // ADD ADDR to DEV enp0s3
+ip addr del 10.0.2.100/255.255.255.0 dev enp0s3; ip a flush; sudo ip a flush to 10.0.2.0/24; //DELETE ONE or ALL ADDR
+=========================================================
+ip l ; ip link show // LIST DEVICES or INTERFACES
+ip link set dev enp0s3 up/down //ENABLE DISABLE INTEFACE
+ip link set mtu 4000 dev enp0s3 //MAX POCKET SIZE TO enp0s3
+sudo ip link set dev enp0s3 down; sudo ip link set dev enp0s3 address AA:BB:CC:DD:EE:FF; -- up //CHANGE MAC
+=========================================================
+ip neigh show; ip n; //SHOW ARP TABLE IP-MAC
+sudo ip neigh add 192.168.0.105 lladdr b0:be:76:43:21:41 dev enp0s3 //ADD RECORD TO ARP TABLE
+sudo ip neigh del dev enp0s3 192.168.0.105; ip neigh flush dev enp0s3; ip neigh flush; //DEL ARP RECORD
+=========================================================
+ip route show; ip r; //LIST ROUTES
+sudo ip route add 169.255.0.0 via 169.254.19.153; sudo ip route add 169.255.0.0 dev enp0s3; //ROUTE ADD or SLUSE or via DEV
+sudo ip route del 169.255.0.0 via 169.254.19.153
+
+
+
+
+

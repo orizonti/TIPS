@@ -1,0 +1,7 @@
+nc 192.168.1.2 8080 //CONNECT TCP; nc -u 192.168.1.2 8080; //CONNECT UDP 
+nc -nlv 8080 //LISTEN PORT
+nc -vz 192.168.31.247 8080 //CHECK PORT VERBOSE,-z NOT SEND DATA
+nc -vz 192.168.31.247 1-1000 2>&1 | grep succeeded
+nc -vzu 192.168.31.247 1-1000 //SCAN UDP PORTS
+nc -l 8080 > paste.txt; nc -N 0.0.0.0 8080 < copy.txt; // FILE EXCHANGE, -N CLOSE AT END FILE
+

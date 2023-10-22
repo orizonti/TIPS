@@ -1,0 +1,18 @@
+RS record separator; NR record number; FS/OFS field separator; NF number of fields 
+ORS output record separator; [+$1 if $1 is text then 0]
+awk '1 { print }' file : PRINT ALL LINES
+awk 'awk 'NR>1 && NR < 4 {print}' file' file :REMOVE LINES
+awk 'NF' file : REMOVE WHITESPACE LINES
+awk 'BEGIN { FS=OFS="," } NF { print $1, $3 }' file : EXTRACT FIELDS
+awk '{ print $1, $3}' FS=, OFS=, file 
+awk '{ SUM+=$1 } END { print SUM }' FS=, OFS=, file :CALCULATIONS BY COLUMN
+awk '/./ { COUNT+=1 } END { print COUNT }' file : COUNT NUMBER NON EMPTY LINES
+awk '{ print $3 }' FS=, ORS=' ' file; echo : JOIN LINES
+awk '+$1 { COUNT+=1 } END { print COUNT }' file : GET ONLY LINES WITH NUMBER VALUES
+awk 'a[$0]++' file : GET DUPLICATE LINES
+awk '!a[$0]++' file :REMOVE DUPLICATE LINES
+awk '$3 { print toupper($0); }' file : TO UPPER CASE
+awk '+$1 { SUM+=$1; NUM+=1 } END { printf("AVG=%f",SUM/NUM); }' FS=, file : PRINT FLOATING POINT
+awk '+$1 { printf("%10s | %4d\n",  $3, $1) }' FS=, file : TABULAR PRINT
+awk '+$1 { printf("%s ",  $3) }' FS=, file; echo : PRINT ONE LINE
+awk '+$1 { printf("%s\n",  $3) }' FS=, file : PRINT IN COLUMN

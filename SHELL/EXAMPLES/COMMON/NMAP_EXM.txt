@@ -1,5 +1,3 @@
-//========================================================================
-//NMAP SCAN IP//
 nmap -sP 192.168.43.1-220; nmap -sP 192.168.43.0/24; //PING SCAN -sL //GET LIST
 nmap scanme.nmap.org //SCAN HOST
 nmap -sS scanme.nmap.org //STEALTH SCAN
@@ -13,4 +11,4 @@ nmap 192.164.1.1 192.164.0.2; nmap 192.164.0.0–255 //SCAN LIST
 nmap 192.164.1.*; nmap 192.164.0.1,2,3,4
 nmap -v scanme.nmap.org //VERBOSE OUTPUT
 nmap -sV -p 22,53,110,143,4564 198.116.0-255.1-127
-//====================================
+

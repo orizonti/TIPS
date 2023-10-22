@@ -3,3 +3,4 @@ $path_esp = cat path_esp.txt; $path_esp | grep  NAME | foreach { $_; $env:path +
 --------------------------------------------------------------------------------------
 $string_with_whitespace -split "\s+"; [SPLIT WHITESPACE] 
 $path_choco = $env:path -split ";" | grep choco; echo $path_choco; start $path_choco [OPEN DIRECTORY FROM GREP]
+$val = 20; $val = 30 + $val; $str = "text $val"; // "text 50"

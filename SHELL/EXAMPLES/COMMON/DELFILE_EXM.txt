@@ -1,0 +1,5 @@
+ls -name | grep -v build | foreach { rm -r $_}
+fd -d 1 -E 3* | foreach { rm $_}
+BASH
+fd -d 1 -E 3* -x rm {}
+

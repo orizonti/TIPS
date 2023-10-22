@@ -1,0 +1,45 @@
+#TELESCOPE================================
+(leader ff)  [find_files]; fg  [live_grep]; fb  [buffers]; fh [help_tags]; fs [grep_string]; gf [git_files]
+dd [Telescope diagnostics]
+
+#LSP DIAGNOSTICS================================
+(leader do) [diagnostic.open_float]; (d[) [diagnostic.goto_prev]; (d]) [diagnostic.goto_next]
+
+#LSP_NAVIGATION================================
+{i  } C-K   [ls.expand()] 
+{i s} C-L   [ls.jump( 1); {i s} C-J   ls.jump(-1)];
+{i s} C-E  [choice_active];
+
+#LSP_DIAGNOSTIC================================
+(space e) [diagnostic.open_float]; ([d) [diagnostic.goto_prev]; (]d) [diagnostic.goto_next]; (space q) [diagnostic.setloclist]
+
+gD [declaration]; gd [definition]; gi [implementation]; 
+K [hover];  C-k  [signature_help]; 
+(space wa) [add_workspace_folder]; (space wr) [remove_workspace_folder]; (space wl) [list_workspace_folders];
+
+(space) [type_definition]; (space rn) [rename];
+(space ca) [code_action]; gr [references]; (space f) [format]; 
+
+#DAP================================
+'
+(leader dh) [toggle_breakpoint]; (leader dR) [clear_breakpoints]; RightMouse [toggle_breakpoint];
+(leader dH) [set_breakpoint(vim.fn.input('Breakpoint condition'))];
+
+A-k [step_out]; A-l [step_into]; A-j [step_over]; F5  [continue]
+(leader dn) [run_to_cursor]; (leader dc) [terminate]
+
+(leader de) [set_exception_breakpoints({"all"})]
+leader da [attach]; leader dA [attachToRemote]
+
+(leader dk) [dap.up]; dj  [dap.down];
+
+leader di [dap.ui.widgets.hover]; d?  [dap.ui.widgets; widgets.centered_float]; du  [dapui.toggle]
+leader dr [dap.repl.toggle]; du [dapui.toggle
+#================================================
+leader b [CtrlPBuffer]; C-p  [CtrlP
+
+F2 [vim.o.pastetoggle]
+F11 [:set spell!] : CHECK ORPHO
+
+
+

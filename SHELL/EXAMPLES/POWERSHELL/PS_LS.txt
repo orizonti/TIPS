@@ -1,0 +1,12 @@
+Get-ChildItem -Path C:\Test
+Get-ChildItem -Path C:\Test -Name //GET ONLY NAME
+Get-ChildItem -Path C:\Test\*.txt -Recurse -Force // SHOW HIDDEN in SUBS DIR
+Get-ChildItem -Path C:\Test\* -Include *.txt // FILTER \* - MANDATORY
+Get-ChildItem -Path C:\Test\ -Recurse -Include *.txt
+Get-ChildItem -Path C:\Test\Logs\* -Exclude Nam* // \* - MANDATORY
+Get-ChildItem -Path C:\Parent -Depth 2
+
+New-Item -ItemType Junction -Name tmp -Target $env:TEMP
+Get-ChildItem | Select-Object name,LinkTarget
+Get-ChildItem ~\AppData\Local\Microsoft\WindowsApps\MicrosoftEdge.exe |
+    Select-Object Mode, LinkTarget, LinkType, Name

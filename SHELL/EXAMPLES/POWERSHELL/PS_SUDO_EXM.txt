@@ -1,2 +1,9 @@
+"INSTALLATION"
+gsudo [options]                  # Elevates your current shell
+gsudo [options] {command} [args] # Runs {command} with elevated
+gsudo status [--json | filter ]  # Shows current user console status.
+gsudo !!                         # Re-run last command as admin.
+gsudo -n # launch the current shell elevated in a new console window
+gsudo -n -w powershell ./Do-Something.ps1 # launch in new window wait exit
+gsudo notepad %windir%\system32\drivers\etc\hosts # launch windows app
 start pwsh -verb runAs  
-gsudo command 

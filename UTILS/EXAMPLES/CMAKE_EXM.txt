@@ -1,5 +1,12 @@
-cmake --build . --target myexe --config Release
-cmake --build . --target install
+cmake -G "Ninja" -S./ -B./build 
+cmake -G Ninja -SDIRSOURCE -BDIR_BUILD -D CMAKE_BUILD_TYPE=Release
+cmake --build DIR_BUILD --target myexe -j 3 --
+cmake --build DIR_BUILD --target install
+
+cmake -L -N :VARS; cmake -L ..; cmake -LA ..; cmake -LAH :build and list VARIABLES
+
+cmake DIR -G Ninja Multi-Config -D -DCMAKE_CONFIGURATION_TYPES=Debug;Release
+cmake --build . --config Release :FOR MULTI CONFIG BUILD SYSTEM 
 
 cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DESP_PLATFORM=1 --warn-uninitialized -DCCACHE_ENABLE=0 c:\tools\esp32-latest\esp\hello_world
 cmake .. -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_SYSROOT=$HOME/root -DCMAKE_STAGING_PREFIX=/tmp/package

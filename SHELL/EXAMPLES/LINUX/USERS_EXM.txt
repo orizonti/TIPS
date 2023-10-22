@@ -1,0 +1,16 @@
+USERS: USERADD, USERMOD, PASSWD, OPENSSL, GROUPS, ID, GROUPADD, DELGROUP, CHGRP
+-------------------------------------------------------------------------------
+useradd -D //PRINT DEFAULT PARAMETER for NEW USER
+sudo useradd -G adm -s /bin/bash new_user; passwd new_user; //WITHOUT passwd new_user INACT
+openssl passwd mypassw0rd; -> crypt_pass; useradd -p crypt_pass; 
+sudo useradd -o -u 0 -g 0 -s /bin/bash newroot // -o, --non-unique UID
+cat /etc/passwd; //LIST
+GROUPS
+cat /etc/group; //LIST; 
+chgrp adm test.file; groupadd test; delgroup group;
+groups, id //LIST USER'S GROUPS, id print UIDS
+
+sudo usermod -a -G group_name user_name //-a APPEND to -G GROUPS
+sudo usermod -g test sergiy //CHANGE PRIMARI GROUP for USER
+sudo usermod -R group user //REMOVE USER FROM GROUP
+//==========================================================

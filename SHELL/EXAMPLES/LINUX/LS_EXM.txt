@@ -1,0 +1,15 @@
+ls -a        //EVERYTHING INCLUDING HIDDEN FILES:
+ls -lh       //SIZE AND TIMESTAMP
+ls -S        //SORTED BY SIZE:
+ls -lS       //
+ls -d */     //DIRS
+ls -d .*/ */ //DIRECTORIES ONLY, INCLUDE HIDDEN:
+ls -ltc      //SORTED BY CHANGED DATE, MOST RECENT FIRST
+ls -lt       //SORT CREATE TIME
+ls -1        //SINGLE COLUMN
+ls -R        //RECURSE MODE
+ls -F        //LIST WITH TRAILING /
+ls -la       //LONG FORTAM LIST
+ls -lh       //HUMAN REEADABLE INITS KiB MiM
+ls -ltr      //MODIF TIME OLDEST FIRST
+

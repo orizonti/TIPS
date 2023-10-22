@@ -1,0 +1,17 @@
+systemctl list-units --type service --state running
+systemctl list-unit-files 'mysql*' --type service 
+systemctl start/stop nginx.service
+systemctl stop 'php*.service' //SERVICES BY PATTERN
+systemctl restart reload reload-or-restart nginx //RESTART, REREAD CONF
+systemctl -l status myunit //-l CUTE PRINT
+systemctl status --lines=50 avahi-daemon //GET LAST 50 strings output
+systemctl enable/disable nginx //SET TO AUTOLOAD
+systemctl edit --full nginx// >> /etc/systemd/*
+systemctl revert nginx  // REVERT EDIT
+systemctl edit nginx // >> /etc/systemd/system/nginx.service.d/override
+systemctl mask/unmask nginx // DISABLE SYSTEM SERVICE
+systemctl daemon-reload
+
+$USER/.config/systemd/user; /usr/lib/systemd/user/. //USERS SERVICES
+systemctl --user list-unit-files --type service
+systemctl --user status dbus.service

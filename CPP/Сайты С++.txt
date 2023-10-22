@@ -1,0 +1,4 @@
+cppreference.com
+isocpp.org/wiki/faq
+cppinsights.io //test cpp code
+https://godbolt.org

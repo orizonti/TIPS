@@ -1,0 +1,14 @@
+ssh rem_broms@25.34.64.59 -p 2222
+scp /home/dir/file user_name@hostname:dir/
+scp user_name@hostname:dir/file /home/dir/
+-----------------------------------------------------------------
+sudo groupadd fuse; sudo usermod -aG fuse $USER; [/etc/fuse.conf user_allow_other]
+sshfs spp@astra332:/home/spp ~/mnt
+-----------------------------------------------------------------
+ssh-keygen; ssh-copy-id broms@25.49.217.216
+cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\id_rsa.pub | ssh broms@remote_host "cat >> ~/.ssh/authorized_keys" // /root/.ssh
+CONFIG-----	------------------------------------------------------
+sudo vi /etc/ssh/sshd_config -> AllowUsers user1 user2; AllowGroups root
+sudo systemctl restart sshd
+
